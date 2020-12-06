@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kleio-deployment
+  labels:
+    app: kleio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kleio
+  template:
+    metadata:
+      labels:
+        app: kleio
+    spec:
+      containers:
+      - name: web
+        image: jonykalavera/kleio
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+      - name: graph-db
+        image: neo4j:4.2.1
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000

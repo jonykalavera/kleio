@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kleio-deployment
+  namespace: kleio
   labels:
     app: kleio
 spec:
@@ -16,8 +17,12 @@ spec:
     spec:
       containers:
       - name: web
-        image: jonykalavera/kleio
-        imagePullPolicy: Never
+        image: docker.io/jonykalavera/kleio
+        env:
+        - name: ROCKET_ADDRESS
+          value: "0.0.0.0"
+        - name: ROCKET_PORT
+          value: "8000"
         resources:
           requests:
             memory: "64Mi"

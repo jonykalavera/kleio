@@ -5,7 +5,7 @@ pub struct Entity {
 }
 
 impl Entity {
-    pub fn new(id: String) -> Entity {
+    pub fn new() -> Entity {
         Entity {
             id
         }
